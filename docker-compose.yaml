@@ -1,0 +1,22 @@
+services:
+  wordpress:
+    depends_on:
+      - mariadb
+    image: wordpress:4.9.4-php7.2-apache
+    container_name: wordpress
+    environment:
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=db_password
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_NAME=webserver
+    ports:
+      - 80:80
+
+  mariadb:
+    image: mariadb:10.4.12
+    container_name: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=db_password
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=wp_password
+      - MYSQL_DATABASE=webserver
